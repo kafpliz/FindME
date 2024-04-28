@@ -1,4 +1,3 @@
-import { log } from "console"
 import express from "express"
 
 const FormRouter = express.Router()
@@ -16,7 +15,7 @@ connection.connect((err) => {
     if (err) {
         return console.error("Ошибка: " + err.message);
     } else {
-        console.log('Connected...')
+        console.log('Connected... form')
     }
 })
 
@@ -33,15 +32,17 @@ FormRouter.post('/create', async (req, res) => {
 
         connection.execute(sqlHuman + valueHuman, (err, result, fields) => { console.log(err); })
         connection.execute('select * from human_forms', (err, result, fields) => { res.send(result) })
+       
+
     }
 
     if (formType == 0) {
-        let sqlAnimal: string = 'insert into animals_forms(human, nick, peculiarity, description, img, time,found)';
+        let sqlAnimal: string = 'insert into animal_forms(human, nick, peculiarity, description, img, time,found)';
         let valueAnimal: string = ` values("${body.human == true ? 1 : 0}", "${body.nick}", "${body.peculiarity}", "${body.description}", "${body.img}","${body.date}", ${body.found == true ? 1 : 0})`
 
         connection.execute(sqlAnimal + valueAnimal, (err, result, fields) => { console.log(err); })
-        connection.execute('select * from animals_forms', (err, result, fields) => { res.send(result) })
-
+        connection.execute('select * from animal_forms', (err, result, fields) => { res.send(result) })
+   
     }
 
 
@@ -77,8 +78,13 @@ FormRouter.get('/get', async (req, res) => {
             });
 
         });
+        
+
     }
 
 
 })
+
+
+
 export { FormRouter }

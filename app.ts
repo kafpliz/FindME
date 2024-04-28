@@ -1,5 +1,6 @@
 import express from "express"
 import { FormRouter } from "./routes/form.route";
+import { AuthRoute } from "./routes/auth.route";
 
 
 const app = express();
@@ -12,6 +13,7 @@ app.get('/', (req, res) => {
 })
 
 app.use('/form', FormRouter)
+app.use('/auth', AuthRoute)
 
 
 
