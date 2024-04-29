@@ -3,13 +3,9 @@ import express from "express"
 const FormRouter = express.Router()
 import mysql from 'mysql2'
 import { Human } from "../interfaces/forms"
+import { dbConnect } from "../config"
 
-const connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    database: 'findme',
-    password: 'kafpliz'
-})
+const connection = mysql.createConnection(dbConnect)
 
 connection.connect((err) => {
     if (err) {
